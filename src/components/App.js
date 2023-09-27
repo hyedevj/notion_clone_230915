@@ -12,8 +12,7 @@ export default function App({ $target }) {
 
     const initialState = []
     new PostPage({
-        $target: $listContainer,
-        initialState
+        $target: $listContainer
     })
     new Editor({
         $target: $rendingContainer

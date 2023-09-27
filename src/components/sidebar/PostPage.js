@@ -1,12 +1,9 @@
 import PostList from "./PostList.js"
 
-export default function PostPage({ $target, initialState }) {
+export default function PostPage({ $target }) {
   const $page = document.createElement("div")
   $page.className = 'documentDiv'
   $target.appendChild($page)
-  new PostList({
-    $target: $page
-  })
 
   const testData = [
     {
@@ -33,6 +30,11 @@ export default function PostPage({ $target, initialState }) {
     }
   ]
 
-  this.state = testData
+  new PostList({
+    $target: $page,
+    testData
+  })
+  
+  //this.state = testData
 
 }
