@@ -1,9 +1,13 @@
+import { request } from "../../utils/api.js"
 import PostList from "./PostList.js"
 
 export default function PostPage({ $target }) {
   const $page = document.createElement("div")
   $page.className = 'documentDiv'
   $target.appendChild($page)
+
+  // api 테스트 코드
+  const data = request("/documents")
 
   const testData = [
     {
@@ -32,7 +36,7 @@ export default function PostPage({ $target }) {
 
   new PostList({
     $target: $page,
-    testData
+    testData: data
   })
 
   // TODO: 컴포넌트화 시키기
