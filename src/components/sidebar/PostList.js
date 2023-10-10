@@ -1,7 +1,14 @@
-export default function PostList({ $target, testData }) {
+export default function PostList({ $target, initialState, onAttach, onDelete }) {
 	const $postList = document.createElement("div")
 	$postList.className = "postList"
 	$target.appendChild($postList)
+
+	this.state = initialState
+
+	this.setState = (nextState) => {
+		this.state = nextState
+		this.render()
+	}
 
 	this.createTreeView = (data) => {
 		let str = ""
@@ -22,17 +29,20 @@ export default function PostList({ $target, testData }) {
 		return str
 	}
 
-
-	$postList.innerHTML =
-		`<ul>
-			${testData.map(document => `
+	this.render = () => {
+		$postList.innerHTML =
+			`<ul>
+			${this.state.map(document => `
 				<li class="dataList">📄 ${document.title}
 					<button class="addBtn">➕</button>
 					<button class="delBtn">🗑️</button>
 				</li>
 				${document.documents.length > 0 ? `<ul>${this.createTreeView(document.documents)}</ul>` : ""}
 				`
-		).join("")
-		}
+			).join("")
+			}
 		</ul>`
+	}
+	this.render()
+
 }
