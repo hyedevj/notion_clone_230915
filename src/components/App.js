@@ -16,7 +16,13 @@ export default function App({ $target }) {
     })
     postPage.setState()
 
-    new Editor({
-        $target: $rendingContainer
+    const editorPage = new Editor({
+        $target: $rendingContainer,
+        initialState: {
+            post: {
+                title: '',
+                content: ''
+            }
+        }
     })
 }
