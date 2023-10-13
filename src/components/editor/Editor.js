@@ -1,4 +1,4 @@
-export default function Editor ({ $target, initialState }) {
+export default function Editor ({ $target, initialState, onEditing }) {
     const $editor = document.createElement("div")
     $editor.className = "editorDiv"
     $target.appendChild($editor)
@@ -17,6 +17,10 @@ export default function Editor ({ $target, initialState }) {
             <textarea name="content" class="editorContent" placeholder="내용을 입력하세요" autofocous></textarea>
         `
     }
+
+    $editor.addEventListener('keyup', (e) => {
+        onEditing()
+    })
     
     this.render()
 }
