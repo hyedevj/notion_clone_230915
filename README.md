@@ -15,3 +15,4 @@
 - [x] Editor, EditorPage컨포넌트 분리
 - [x] EditorPage, Editor 1차 구현
 - [x] EditorPage, Editor 2차 구현
+- [x] EditorPage, Editor 리팩토링
