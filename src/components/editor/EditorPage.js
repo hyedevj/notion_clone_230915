@@ -45,7 +45,6 @@ export default function EditorPage({$target, initialState}) {
         }
     })
 
-
     this.setState = async (nextState) => {
 		if(nextState === undefined) {
 			return 

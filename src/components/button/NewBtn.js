@@ -1,3 +1,4 @@
+import { pushUrl } from "../../utils/Router.js"
 import { request } from "../../utils/api.js"
 
 export default function NewBtn({$target, initialState}) {
@@ -15,13 +16,14 @@ export default function NewBtn({$target, initialState}) {
   this.render()
 
   $btn.addEventListener('click', () => {
-    console.log(1)
-    request('/documents', {
+    const { link } = this.state
+    pushUrl(`/documents/${link}`)
+    /*request('/documents', {
       method: 'POST',
       body: JSON.stringify({
         title: '수동등록',
         parent: null
       })
-    })
+    })*/
   })
 }

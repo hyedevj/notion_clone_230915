@@ -1,4 +1,5 @@
-import { request } from "../../utils/api.js"
+import { pushUrl } from "../../utils/Router.js"
+//import { request } from "../../utils/api.js"
 
 export default function PostList({ $target, initialState, onAttach, onDelete }) {
 	const $postList = document.createElement("div")
@@ -39,7 +40,7 @@ export default function PostList({ $target, initialState, onAttach, onDelete }) 
 						<button class="addBtn" data-id="${post.id}">➕</button>
 						<button class="delBtn" data-id="${post.id}">🗑️</button>
 					</li>
-					${post.documents.length > 0 ? `<ul>${this.createTreeView(post.documents)}</ul>` : ""}
+					${post.documents.length > 0 ? `<ul>${this.createTreeView(post.documents)}</ul>` : ''}
 					`
 				).join("")
 			}
@@ -56,6 +57,11 @@ export default function PostList({ $target, initialState, onAttach, onDelete }) 
 			onAttach(id)
 		} else if(className === 'delBtn') {
 			onDelete(id)
-		}  
+		}  else if(className === 'dataList') {
+			if ($li) {
+				const $id = $li.dataset.id
+				pushUrl(`/documents/${$id}`)
+			}
+		}
 	})
 }
