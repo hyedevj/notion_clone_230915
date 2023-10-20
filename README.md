@@ -17,4 +17,4 @@
 - [x] EditorPage, Editor 2차 구현
 - [x] EditorPage, Editor 리팩토링
 - [x] Sidebar 삭제 구현
-- [ ] Sidebar 등록 구현
+- [x] Sidebar 등록 구현
