@@ -15,14 +15,14 @@ export default function PostList({ $target, initialState, onAttach, onDelete }) 
 		for (const key in data) {
 			if (data[key].documents.length > 0) {
 				str += `<li class="dataList">📄 ${data[key].title}
-						<button class="addBtn">➕</button>
-						<button class="delBtn">🗑️</button>
+						<button class="addBtn" data-id="${data[key].id}">➕</button>
+						<button class="delBtn" data-id="${data[key].id}">🗑️</button>
 						<ul>${this.createTreeView(data[key].documents)}</ul>
 					</li>`
 			} else {
 				str += `<li class="dataList">📄 ${data[key].title}
-						<button class="addBtn">➕</button>
-						<button class="delBtn">🗑️</button>
+						<button class="addBtn" data-id="${data[key].id}">➕</button>
+						<button class="delBtn" data-id="${data[key].id}">🗑️</button>
 					</li>`
 			}
 		}
@@ -32,17 +32,29 @@ export default function PostList({ $target, initialState, onAttach, onDelete }) 
 	this.render = () => {
 		$postList.innerHTML =
 			`<ul>
-			${this.state.map(document => `
-				<li class="dataList">📄 ${document.title}
-					<button class="addBtn">➕</button>
-					<button class="delBtn">🗑️</button>
+			${this.state.map(post => `
+				<li class="dataList">📄 ${post.title}
+					<button class="addBtn" data-id="${post.id}">➕</button>
+					<button class="delBtn" data-id="${post.id}">🗑️</button>
 				</li>
-				${document.documents.length > 0 ? `<ul>${this.createTreeView(document.documents)}</ul>` : ""}
+				${post.documents.length > 0 ? `<ul>${this.createTreeView(post.documents)}</ul>` : ""}
 				`
 			).join("")
 			}
 		</ul>`
 	}
 	this.render()
+
+	$postList.addEventListener('click', (e) => {
+		const className = e.target.className
+		const id  = e.target.dataset.id
+		
+		if(className === 'addBtn') {
+			onAttach(id)
+		}
+		else if(className === 'delBtn') {
+			onDelete(id)
+		} 
+	})
 
 }

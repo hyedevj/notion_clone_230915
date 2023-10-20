@@ -11,15 +11,15 @@ export default function PostPage({ $target }) {
   const postList = new PostList({
     $target: $page,
     initialState: [],
-    onAttach: async() => {
+    onAttach: async(id) => {
       await request('/documents', {
         method: 'POST',
         body: {}
       })
       this.setState()
     },
-    onDelete: async() =>  {
-      await request('/documents', {
+    onDelete: async(id) =>  {
+      await request(`/documents/${id}`, {
         method: 'DELETE'
       })
       this.setState()
