@@ -17,31 +17,30 @@ export default function EditorPage({$target, initialState}) {
         onEditing: async (editPost) => {
             // Create 새 글 등록
             // Update 글 수정
-            setTimeout( async () => {
+            setTimeout(async () => {
                 if (this.state.postId === 'new') {
                     const responsePost = await request('/documents', {
                         method: 'POST',
                         body: JSON.stringify(editPost)
                     })
-
-					// PUT을 이용해서 업데이트 갱신
-					if (editPost.content) {
+        
+                    if (editPost.content) {
                         await request(`/documents/${responsePost.id}`, {
                             method: 'PUT',
                             body: JSON.stringify(editPost)
                         })
                     }
-
-					this.setState({
-						postId: responsePost.id
-					})
+                    history.replaceState(null, null, `/documents/${responsePost.id}`)
+                    this.setState({
+                        postId: responsePost.id
+                    })
                 } else {
                     await request(`/documents/${this.state.postId}`, {
                         method: 'PUT',
                         body: JSON.stringify(editPost)
                     })
                 }
-            }, 1000)
+            }, 500)
         }
     })
 
@@ -63,6 +62,7 @@ export default function EditorPage({$target, initialState}) {
 		}
 		this.state = nextState
 
+        this.render()
 		editor.setState(this.state.post || { 
 			title: '',
 			content: ''

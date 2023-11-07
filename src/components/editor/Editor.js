@@ -1,10 +1,9 @@
-export default function Editor ({ $target, initialState, onEditing }) {
+export default function Editor({ $target, initialState, onEditing }) {
     const $editor = document.createElement("div")
     $editor.className = "editorDiv"
     $target.appendChild($editor)
 
-    this.state = initialState;
-
+    this.state = initialState
     let isInit = false
 
     this.setState = (nextState) => {
@@ -16,18 +15,20 @@ export default function Editor ({ $target, initialState, onEditing }) {
 
 
     this.render = () => {
-        if(!isInit) {
+        if (!isInit) {
             $editor.innerHTML = `
-                <input type="text" name="title" class="editorTitle value="${this.state.title}" placeholder="제목 없음" autofocous />
+                <input type="text" name="title" class="editorTitle value=${this.state.title}" placeholder="제목 없음" autofocous />
                 <textarea name="content" class="editorContent" value="${this.state.content}" placeholder="내용을 입력하세요" autofocous></textarea>
             `
-        }
         isInit = true
+        }
+    
     }
 
-    $editor.addEventListener('keyup', (e) => {
-        const attrName = e.target.getAttribute('name')
 
+    $editor.addEventListener('keyup', (e) => {
+        const attrName =  e.target.getAttribute('name')
+        
         this.setState({
             ...this.state,
             [attrName]: e.target.value
@@ -35,6 +36,6 @@ export default function Editor ({ $target, initialState, onEditing }) {
 
         onEditing(this.state)
     })
-    
+
     this.render()
 }

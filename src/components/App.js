@@ -30,8 +30,8 @@ export default function App({ $target }) {
         const { pathname } = window.location
 
         const pathList = pathname.split('/')
-        if (pathList.length >= 3) {
-            postId = pathList[2]
+        if (pathname.indexOf('/documents') === 0) {
+            const [, , postId] = pathname.split('/')
             editorPage.setState({ postId })
         }
         postPage.setState()
