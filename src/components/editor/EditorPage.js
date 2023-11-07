@@ -73,8 +73,6 @@ export default function EditorPage({$target, initialState}) {
         $target.appendChild($page)
     }
 
-    this.render()
-
 	const fetchPost = async() => {
 		const { postId } = this.state
 
